@@ -4,19 +4,21 @@ import Avatar from "./Avatar";
 class Message extends React.Component {
     constructor(props) {
         super(props);
-        this.messageTime = new Date();
+        this.state = {
+            messageTime: new Date()
+        };
     }
-
+    componentWillMount() {
+        this.state.messageTime.setTime(this.props.time);
+    }
     render() {
         return (
-            <div className="message" owner={this.props.owner}>
-                <Avatar src={this.props.src} alt={this.props.name}/>
+            <div className="message" data-isoutgoing={this.props.isoutgoing}>
+                <Avatar src="https://iwanbazz.github.io/img/avatar.png" alt={this.props.name}/>
                 <div className="messageBlock">
                     <p className="username">{this.props.name}</p>
                     <p className="messageText">{this.props.text}</p>
-                    <p className="messageTime">{(this.messageTime.getHours() < 10) ? "0"+this.messageTime.getHours() : this.messageTime.getHours()}:
-                        {(this.messageTime.getMinutes() < 10) ? "0"+this.messageTime.getMinutes() : this.messageTime.getMinutes()}:
-                        {(this.messageTime.getSeconds() < 10) ? "0"+this.messageTime.getSeconds() : this.messageTime.getSeconds()}</p>
+                    <p className="messageTime">{this.state.messageTime.toLocaleDateString()} {this.state.messageTime.toLocaleTimeString()}</p>
                 </div>
             </div>
         );

@@ -49,6 +49,7 @@ header .avatar {
   width: calc(100% - 20px);
   margin-top: 10px;
   margin-bottom: 10px;
+  white-space: pre-line;
 
 }
 .messageBlock {
@@ -57,7 +58,6 @@ header .avatar {
   min-width: 150px;
   max-width: 500px;
   border-radius: 5px;
-  vertical-align: bottom;
   word-wrap: break-word;
 }
 .messageText {
@@ -72,34 +72,34 @@ header .avatar {
   margin-right: 5px;
   color: darkgrey;
 }
-.message[owner="false"] .messageBlock {
+.message[data-isoutgoing="false"] .messageBlock {
   left: 0;
   background: #fff;
 }
-.message[owner="false"] {
+.message[data-isoutgoing="false"] {
   left: 20px;
 }
-.message[owner="true"] {
+.message[data-isoutgoing="true"] {
   float: right;
   right: 20px;
 }
-.message[owner="true"] .messageBlock {
+.message[data-isoutgoing="true"] .messageBlock {
   background: #efffde;
   float: right;
 }
-.message[owner="true"] .username {
+.message[data-isoutgoing="true"] .username {
   display: none;
 }
-.message[owner="false"] .username {
+.message[data-isoutgoing="false"] .username {
   color: #2996ad;
   font-weight: 600;
   font-size: 16px;
   margin: 5px;
 }
-.message[owner="false"] .avatar {
+.message[data-isoutgoing="false"] .avatar {
   left: 0;
 }
-.message[owner="true"] .avatar {
+.message[data-isoutgoing="true"] .avatar {
   float: right;
 }
 footer {
