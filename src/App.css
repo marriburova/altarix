@@ -72,34 +72,34 @@ header .avatar {
   margin-right: 5px;
   color: darkgrey;
 }
-.message[data-isoutgoing="false"] .messageBlock {
+.message[data-isoutgoing=false] .messageBlock {
   left: 0;
   background: #fff;
 }
-.message[data-isoutgoing="false"] {
+.message[data-isoutgoing=false] {
   left: 20px;
 }
-.message[data-isoutgoing="true"] {
+.message[data-isoutgoing=true] {
   float: right;
   right: 20px;
 }
-.message[data-isoutgoing="true"] .messageBlock {
+.message[data-isoutgoing=true] .messageBlock {
   background: #efffde;
   float: right;
 }
-.message[data-isoutgoing="true"] .username {
+.message[data-isoutgoing=true] .username {
   display: none;
 }
-.message[data-isoutgoing="false"] .username {
+.message[data-isoutgoing=false] .username {
   color: #2996ad;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   margin: 5px;
 }
-.message[data-isoutgoing="false"] .avatar {
+.message[data-isoutgoing=false] .avatar {
   left: 0;
 }
-.message[data-isoutgoing="true"] .avatar {
+.message[data-isoutgoing=true] .avatar {
   float: right;
 }
 footer {

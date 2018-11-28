@@ -13,15 +13,19 @@ class Footer extends React.Component {
     }
 
     onEnterPress = (event) => {
-        if(event.key === 'Enter' && !event.ctrlKey) {
+        if (event.key === 'Enter' && !event.ctrlKey) {
             event.preventDefault();
 
             if (this.state.message !== '') {
-                this.props.updateChat(this.state.message);
-                this.setState({ message: ''});
+                this.props.updateChat({
+                    id: Date.now(),
+                    text: this.state.message,
+                    isOutgoing: true
+                });
+                this.setState({message: ''});
+            } else if (event.key === "Enter" && event.ctrlKey) {
+                event.target.value += "\n";
             }
-        } else if (event.key === "Enter" && event.ctrlKey) {
-            event.target.value += "\n";
         }
     }
 
@@ -31,7 +35,11 @@ class Footer extends React.Component {
                 <form onSubmit={(event) => {
                     event.preventDefault();
                     if (this.state.message !== '') {
-                        this.props.updateChat(this.state.message);
+                        this.props.updateChat({
+                            id: Date.now(),
+                            text: this.state.message,
+                            isOutgoing: true
+                        });
                         this.setState({ message: ''});
                     }
                 }}>
