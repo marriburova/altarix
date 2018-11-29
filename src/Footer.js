@@ -14,35 +14,31 @@ class Footer extends React.Component {
 
     onEnterPress = (event) => {
         if (event.key === 'Enter' && !event.ctrlKey) {
-            event.preventDefault();
-
-            if (this.state.message !== '') {
-                this.props.updateChat({
-                    id: Date.now(),
-                    text: this.state.message,
-                    isOutgoing: true
-                });
-                this.setState({message: ''});
-            } else if (event.key === "Enter" && event.ctrlKey) {
+            this.handleSubmit(event);
+        }
+        else if (event.key === "Enter" && event.ctrlKey) {
                 event.target.value += "\n";
             }
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (this.state.message !== '') {
+            this.props.updateChat({
+                id: Date.now(),
+                text: this.state.message,
+                isOutgoing: true
+            });
+
+            this.setState({ message: ''});
         }
     }
 
     render() {
         return (
             <footer>
-                <form onSubmit={(event) => {
-                    event.preventDefault();
-                    if (this.state.message !== '') {
-                        this.props.updateChat({
-                            id: Date.now(),
-                            text: this.state.message,
-                            isOutgoing: true
-                        });
-                        this.setState({ message: ''});
-                    }
-                }}>
+                <form onSubmit={this.handleSubmit}>
                     <textarea id="inputMessage"
                               name="message"
                               placeholder="Enter your message..."

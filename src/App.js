@@ -19,20 +19,20 @@ class App extends React.Component {
 
         messagesRef.on('value', (snapshot) => {
             const messages = snapshot.val();
+            const newState = [];
 
             for (let key in messages) {
                 let isOutgoing = false;
-                if (messages[key].name === currentUser) isOutgoing = true;
 
-                this.setState({
-                    messages: [...this.state.messages, {
-                        id: messages[key].id,
-                        name: messages[key].name,
-                        text: messages[key].text,
-                        isOutgoing: isOutgoing
-                    }]
+                if (messages[key].name === currentUser) isOutgoing = true;
+                newState.push({
+                    id: messages[key].id,
+                    name: messages[key].name,
+                    text: messages[key].text,
+                    isOutgoing: isOutgoing
                 });
             }
+            this.setState({ messages: newState });
         })
     }
 
