@@ -4,13 +4,13 @@ import Header from './Header';
 import Chat from './Chat';
 import Footer from './Footer';
 import { db } from './firebase';
+import { connect } from 'react-redux';
 
 const currentUser = "Мария Бурова";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { messages: [] };
         this.updateChat = this.updateChat.bind(this);
     }
 
@@ -32,7 +32,7 @@ class App extends React.Component {
                     isOutgoing: isOutgoing
                 });
             }
-            this.setState({ messages: newState });
+            this.props.dispatch(addNewMessages(newState));
         })
     }
 
@@ -47,11 +47,24 @@ class App extends React.Component {
         return (
             <div className='App'>
                 <Header name={currentUser} />
-                <Chat messages={this.state.messages} />
-                <Footer messages={this.state.messages} updateChat={this.updateChat} />
+                <Chat messages={this.props.messages} />
+                <Footer messages={this.props.messages} updateChat={this.updateChat} />
             </div>
         );
     }
 }
 
-export default App;
+const addNewMessages = (messages) => {
+    return {
+        type: 'NEW_MESSAGE',
+        payload: messages
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        messages: state.messages
+    }
+}
+
+export default connect(mapStateToProps)(App);

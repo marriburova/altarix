@@ -17,7 +17,7 @@ class Message extends React.Component {
                 <Avatar src="https://iwanbazz.github.io/img/avatar.png" alt={this.props.name}/>
                 <div className="messageBlock">
                     <p className="username">{this.props.name}</p>
-                    <p className="messageText">{this.props.text}</p>
+                    <p className="messageText">{this.props.text.toString()}</p>
                     <p className="messageTime">{this.state.messageTime.toLocaleDateString()} {this.state.messageTime.toLocaleTimeString()}</p>
                 </div>
             </div>

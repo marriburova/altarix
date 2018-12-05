@@ -1,15 +1,15 @@
 import React from 'react';
 import Button from './Button';
+import { connect } from 'react-redux';
 
 class Footer extends React.Component {
     constructor() {
         super();
-        this.state = { message: '' };
         this.updateMessage = this.updateMessage.bind(this);
     }
 
     updateMessage = (event) => {
-        this.setState({ message: event.target.value });
+        this.props.dispatch(writeNewMessage(event.target.value));
     }
 
     onEnterPress = (event) => {
@@ -24,14 +24,13 @@ class Footer extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        if (this.state.message !== '') {
+        if (this.props.message !== '') {
             this.props.updateChat({
                 id: Date.now(),
-                text: this.state.message,
+                text: this.props.message,
                 isOutgoing: true
             });
-
-            this.setState({ message: ''});
+            this.props.dispatch(writeNewMessage(''));
         }
     }
 
@@ -43,7 +42,7 @@ class Footer extends React.Component {
                               name="message"
                               placeholder="Enter your message..."
                               rows="4"
-                              value={this.state.message}
+                              value={this.props.newMessage}
                               onChange={this.updateMessage}
                               onKeyDown={this.onEnterPress} />
                     <Button />
@@ -53,5 +52,16 @@ class Footer extends React.Component {
     }
 
 }
+const writeNewMessage = (message) => {
+    return {
+        type: 'WRITE_MESSAGE',
+        payload: message
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        newMessage: state.newMessage
+    }
+}
 
-export default Footer;
+export default connect(mapStateToProps)(Footer);
